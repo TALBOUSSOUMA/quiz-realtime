@@ -3,11 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>quiz realtime</title>
+    <title>🎮 Quiz Party - Jeu enfantin</title>
     <script src="/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
 <body>
-    <h1>Bonjour</h1>
+    <div class="container">
+        <!-- Écran d'accueil -->
+        <div id="accueil" class="screen active">
+            <div class="emoji-icon"></div>
+            <h1>🎮 Quiz Party! ✨</h1>
+            <div class="menu">
+                <button onclick="afficherCreer()">✨ Créer une partie ✨</button>
+                <button onclick="afficherRejoindre()">🎈 Rejoindre une partie 🎈</button>
+            </div>
+        </div>
+
+        <!-- Écran création -->
+        <div id="creer" class="screen">
+            <div class="emoji-icon">🎨</div>
+            <h2>Créer une partie</h2>
+            <div class="form">
+                <input type="text" id="pseudoCreateur" placeholder="🧸 Ton pseudo" value="Joueur">
+                <input type="number" id="nbQuestions" placeholder="📚 Nombre de questions" min="1" max="20" value="5">
+                <button onclick="creerPartie()">Créer la partie ✨</button>
+                <button onclick="retourAccueil()">← Retour</button>
+            </div>
+        </div>
+
+        <!-- Écran rejoindre -->
+        <div id="rejoindre" class="screen">
+            <div class="emoji-icon">🎪</div>
+            <h2>Rejoindre une partie</h2>
+            <div class="form">
+                <input type="text" id="pseudo" placeholder="🧸 Ton pseudo">
+                <input type="text" id="codePartie" placeholder="🔑 Code secret">
+                <button onclick="rejoindrePartie()">Rejoindre 🎈</button>
+                <button onclick="retourAccueil()">← Retour</button>
+            </div>
+        </div>
+
+        <!-- Salle d'attente -->
+        <div id="salle" class="screen">
+            <div class="emoji-icon">⏳</div>
+            <h2>Salle d'attente</h2>
+            <div class="info">
+                <p>🔑 Code de la partie :</p>
+                <strong id="codeAffichage"></strong>
+                <p>👥 Joueurs présents :</p>
+                <ul id="listeJoueurs"></ul>
+            </div>
+            <button id="btnDemarrer" onclick="demarrerPartie()" style="display: none;">🚀 Démarrer la partie ! 🚀</button>
+            <button onclick="retourAccueil()">🚪 Quitter</button>
+        </div>
+    </div>
 </body>
 </html>
